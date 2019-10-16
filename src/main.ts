@@ -43,7 +43,7 @@ async function run() {
 
     core.debug( `Uploading assets to release: ${release_id}...` );
 
-    const files = await fg( glob.split( ',' ) );
+    const files = await fg( glob.split( ';' ) );
     if ( !files.length ) {
       core.setFailed( 'No files found' );
       return;

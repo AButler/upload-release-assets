@@ -21,6 +21,6 @@ jobs:
 
 | Name          | Description                                                                                     | Examples                                                 |
 |---------------|-------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| `files`       | The glob of files to upload (comma-separate multiple globs)                                     | `file.txt` <br> `file*.txt` <br> `file_{a,b}.txt,*.json` |
+| `files`       | The glob of files to upload (comma-separate multiple globs)                                     | `file.txt` <br> `file*.txt` <br> `file_{a,b}.txt;*.json` |
 | `repo-token`  | The GitHub token to use to amend the release _(recommended to use `${{ secrets.GITHUB_TOKEN }}`)_ | `${{ secrets.GITHUB_TOKEN }}`                            |
 | `release-tag` | _(Optional)_ Specify the tag of the release to upload to                                          | `v1.0.0`                                                 |
