@@ -20,7 +20,7 @@ async function run() {
       
       release_id = release.data.id;
     } else {
-      const action = github.context.action;
+      const action = github.context.payload.action;
 
       switch ( action ) {
         case 'published':
@@ -71,8 +71,7 @@ async function run() {
         'content-length': fs.statSync( file ).size
       };
 
-      const response = await octokit.repos.uploadReleaseAsset( { url, headers, name: fileName, file: fileStream } );
-      core.debug( `Assert '${file}' can be downloaded from ${response.data.value.browser_download_url}` );
+      await octokit.repos.uploadReleaseAsset( { url, headers, name: fileName, file: fileStream } );
     }
   } catch (error) {
     core.setFailed(error.message);
