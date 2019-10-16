@@ -1,10 +1,15 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Upload assets to a Release'
+description: 'GitHub Action that uploads assets to a GitHub release'
+author: 'AButler'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  files:
+    description: 'A glob of the files to upload'
+    required: true
+  release-tag:
+    description: 'The tag name of the release to upload to (if not specified then the release that triggered the workflow is used)'
+  repo-token:
+    description: 'secrets.GITHUB_TOKEN'
+    required: true
 runs:
   using: 'node12'
   main: 'lib/main.js'
