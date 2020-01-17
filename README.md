@@ -11,16 +11,16 @@ jobs:
   build:
     # ...
     steps:
-      - uses: AButler/upload-release-assets@v1.0
+      - uses: AButler/upload-release-assets@v2.0
         with:
-          files: 'artifacts/*,packages/*.nupkg'
+          files: 'artifacts/*;packages/*.nupkg'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Inputs
 
-| Name          | Description                                                                                     | Examples                                                 |
-|---------------|-------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| `files`       | The glob of files to upload (comma-separate multiple globs)                                     | `file.txt` <br> `file*.txt` <br> `file_{a,b}.txt;*.json` |
+| Name          | Description                                                                                       | Examples                                                 |
+|---------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `files`       | The glob of files to upload (semicolon separate multiple globs)                                   | `file.txt` <br> `file*.txt` <br> `file_{a,b}.txt;*.json` |
 | `repo-token`  | The GitHub token to use to amend the release _(recommended to use `${{ secrets.GITHUB_TOKEN }}`)_ | `${{ secrets.GITHUB_TOKEN }}`                            |
 | `release-tag` | _(Optional)_ Specify the tag of the release to upload to                                          | `v1.0.0`                                                 |
