@@ -20,7 +20,7 @@
   "author": "AButler",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.9.1",
+    "@actions/core": "^1.10.0",
     "@actions/github": "^1.1.0",
     "fast-glob": "^3.0.4",
     "mime-types": "^2.1.24"
