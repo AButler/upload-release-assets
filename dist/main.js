@@ -67,7 +67,7 @@ async function run() {
             core.setFailed("No files found");
             return;
         }
-        const { data: { upload_url: url }, } = await octokit.rest.repos.getRelease({ ...repo, release_id });
+        const { data: { upload_url: upload_url, html_url: html_url }, } = await octokit.rest.repos.getRelease({ ...repo, release_id });
         const { data: existingAssets } = await octokit.rest.repos.listReleaseAssets({
             ...repo,
             release_id,
@@ -92,7 +92,7 @@ async function run() {
             };
             await octokit.rest.repos.uploadReleaseAsset({
                 ...repo,
-                url: url,
+                url: upload_url,
                 release_id: release_id,
                 headers,
                 name: fileName,
@@ -100,6 +100,7 @@ async function run() {
                 data: fileStream,
             });
         }
+        console.log(`Upload complete: ${html_url}`);
     }
     catch (error) {
         const message = error?.message || "Unknown error";

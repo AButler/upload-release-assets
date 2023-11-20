@@ -49,7 +49,7 @@ async function run() {
     }
 
     const {
-      data: { upload_url: url },
+      data: { upload_url: upload_url, html_url: html_url },
     } = await octokit.rest.repos.getRelease({ ...repo, release_id });
 
     const { data: existingAssets } = await octokit.rest.repos.listReleaseAssets(
@@ -85,7 +85,7 @@ async function run() {
 
       await octokit.rest.repos.uploadReleaseAsset({
         ...repo,
-        url: url as string,
+        url: upload_url as string,
         release_id: release_id,
         headers,
         name: fileName,
@@ -93,6 +93,8 @@ async function run() {
         data: fileStream as unknown as string,
       });
     }
+
+    console.log(`Upload complete: ${html_url}`);
   } catch (error: any) {
     const message = error?.message || "Unknown error";
     core.setFailed(message);
