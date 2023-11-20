@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "GitHub Action for uploading assets to a Release",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "tsc"
   },
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@types/mime-types": "^2.1.0",
     "@types/node": "^20.9.2",
+    "all-contributors-cli": "^6.26.1",
     "typescript": "^5.2.2"
   }
 }
