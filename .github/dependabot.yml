@@ -1,0 +1,13 @@
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "AButler"
