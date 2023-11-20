@@ -45,6 +45,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Borda",
+      "name": "Jirka Borovec",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6035284?v=4",
+      "profile": "https://github.com/Borda",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
