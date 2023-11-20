@@ -3,7 +3,7 @@
 <a href="https://github.com/AButler/upload-release-assets"><img alt="GitHub Actions status" src="https://github.com/AButler/upload-release-assets/workflows/CI/badge.svg"></a>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The Upload Release Assets GitHub Action uploads files (base on a glob) to a GitHub release. This is a cross-platform action that runs on any environment.
@@ -49,6 +49,7 @@ A big thanks to those who have contributed to this repo:
       <td align="center" valign="top" width="14.28%"><a href="https://andre601.ch/"><img src="https://avatars.githubusercontent.com/u/11576465?v=4?s=100" width="100px;" alt="Andre_601"/><br /><sub><b>Andre_601</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=Andre601" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://author.io/"><img src="https://avatars.githubusercontent.com/u/770982?v=4?s=100" width="100px;" alt="Corey Butler"/><br /><sub><b>Corey Butler</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=coreybutler" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Borda"><img src="https://avatars.githubusercontent.com/u/6035284?v=4?s=100" width="100px;" alt="Jirka Borovec"/><br /><sub><b>Jirka Borovec</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=Borda" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/NotMyFault"><img src="https://avatars.githubusercontent.com/u/13383509?v=4?s=100" width="100px;" alt="Alexander Brandes"/><br /><sub><b>Alexander Brandes</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=NotMyFault" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
