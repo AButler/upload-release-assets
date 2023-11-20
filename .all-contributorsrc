@@ -1,0 +1,25 @@
+{
+  "projectName": "upload-release-assets",
+  "projectOwner": "AButler",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "AButler",
+      "name": "Andrew Butler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1628649?v=4",
+      "profile": "https://github.com/AButler",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}
