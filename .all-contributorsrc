@@ -1,0 +1,70 @@
+{
+  "projectName": "upload-release-assets",
+  "projectOwner": "AButler",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "AButler",
+      "name": "Andrew Butler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1628649?v=4",
+      "profile": "https://github.com/AButler",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dependabot[bot]",
+      "name": "dependabot[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "profile": "https://github.com/apps/dependabot",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Andre601",
+      "name": "Andre_601",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11576465?v=4",
+      "profile": "https://andre601.ch/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "coreybutler",
+      "name": "Corey Butler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/770982?v=4",
+      "profile": "https://author.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Borda",
+      "name": "Jirka Borovec",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6035284?v=4",
+      "profile": "https://github.com/Borda",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "NotMyFault",
+      "name": "Alexander Brandes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13383509?v=4",
+      "profile": "https://github.com/NotMyFault",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false
+}

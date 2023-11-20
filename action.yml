@@ -1,18 +1,20 @@
-name: 'Upload assets to a Release'
-description: 'GitHub Action that uploads assets to a GitHub release using a glob (cross-platform)'
-author: 'AButler'
+name: "Upload assets to a Release"
+description: "GitHub Action that uploads assets to a GitHub release using a glob (cross-platform)"
+author: "AButler"
 branding:
   color: green
   icon: upload-cloud
 inputs:
   files:
-    description: 'A glob of the files to upload'
+    description: "A glob of the files to upload"
     required: true
   release-tag:
-    description: 'The tag name of the release to upload to (if not specified then the release that triggered the workflow is used)'
+    description: "The tag name of the release to upload to (if not specified then the release that triggered the workflow is used)"
+  release-id:
+    description: "The ID of the release to upload to (if not specified then the release that triggered the workflow is used)"
   repo-token:
-    description: 'secrets.GITHUB_TOKEN'
+    description: "secrets.GITHUB_TOKEN"
     required: true
 runs:
-  using: 'node20'
-  main: 'lib/main.js'
+  using: "node20"
+  main: "dist/main.js"
