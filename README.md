@@ -3,7 +3,7 @@
 <a href="https://github.com/AButler/upload-release-assets"><img alt="GitHub Actions status" src="https://github.com/AButler/upload-release-assets/workflows/CI/badge.svg"></a>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The Upload Release Assets GitHub Action uploads files (base on a glob) to a GitHub release. This is a cross-platform action that runs on any environment.
@@ -46,6 +46,7 @@ A big thanks to those who have contributed to this repo:
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/AButler"><img src="https://avatars.githubusercontent.com/u/1628649?v=4?s=100" width="100px;" alt="Andrew Butler"/><br /><sub><b>Andrew Butler</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=AButler" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/dependabot"><img src="https://avatars.githubusercontent.com/in/29110?v=4?s=100" width="100px;" alt="dependabot[bot]"/><br /><sub><b>dependabot[bot]</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=dependabot[bot]" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://andre601.ch/"><img src="https://avatars.githubusercontent.com/u/11576465?v=4?s=100" width="100px;" alt="Andre_601"/><br /><sub><b>Andre_601</b></sub></a><br /><a href="https://github.com/AButler/upload-release-assets/commits?author=Andre601" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
