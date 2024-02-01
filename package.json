@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.0",
-    "@types/node": "^20.9.2",
+    "@types/node": "^20.11.16",
     "all-contributors-cli": "^6.26.1",
     "typescript": "^5.2.2"
   }
