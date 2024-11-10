@@ -27,7 +27,7 @@ jobs:
 
 | Name          | Description                                                                                       | Examples                                                 |
 | ------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| `files`       | The glob of files to upload (semicolon separate multiple globs)                                   | `file.txt` <br> `file*.txt` <br> `file_{a,b}.txt;*.json` |
+| `files`       | The glob of files to upload (semicolon separate multiple globs). <br>Always use forward-slashes for glob expressions, even for Windows paths. | `file.txt` <br> `file*.txt` <br> `file_{a,b}.txt;*.json` <br> `/path/to/file.txt` <br> `C:/path/to/file*.txt` |
 | `repo-token`  | The GitHub token to use to amend the release _(recommended to use `${{ secrets.GITHUB_TOKEN }}`)_ | `${{ secrets.GITHUB_TOKEN }}`                            |
 | `release-id`  | _(Optional)_ Explicitly specify the release id                                                    | `42`                                                     |
 | `release-tag` | _(Optional)_ Explicity specify the tag of the release                                             | `v1.0.0`                                                 |
