@@ -22,12 +22,18 @@ async function run() {
       release_id = parseInt(releaseId);
     } else if (tag) {
       core.debug(`Getting release id for ${tag}...`);
-      const release = await octokit.rest.repos.getReleaseByTag({
-        ...repo,
-        tag,
-      });
+      try {
+        const release = await octokit.rest.repos.getReleaseByTag({
+          ...repo,
+          tag,
+        });
 
-      release_id = release.data.id;
+        release_id = release.data.id;
+      } catch (error: any) {
+        const message = error?.message || "Unknown error";
+        core.setFailed(`Could not get release id for tag ${tag}: ${message}`);
+        return;
+      }
     } else {
       core.debug(
         `Using release id from action ${github.context.payload.release.id}...`
