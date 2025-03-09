@@ -72,6 +72,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Dspecht7123",
+      "name": "David Specht",
+      "avatar_url": "https://avatars.githubusercontent.com/u/95086200?v=4",
+      "profile": "https://github.com/Dspecht7123",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
