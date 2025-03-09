@@ -63,6 +63,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mattyg",
+      "name": "mattyg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/159270?v=4",
+      "profile": "https://buildyourweb.app/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
