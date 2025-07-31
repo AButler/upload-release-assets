@@ -1,0 +1,3 @@
+node_modules/** -linguist-vendored -linguist-generated
+/dist/** generated linguist-generated -merge
+package-lock.json generated linguist-generated -merge
