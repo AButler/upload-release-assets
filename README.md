@@ -15,7 +15,7 @@ jobs:
   build:
     # ...
     steps:
-      - uses: AButler/upload-release-assets@v3.0
+      - uses: AButler/upload-release-assets@v4.0
         with:
           files: "artifacts/*;packages/*.nupkg"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
