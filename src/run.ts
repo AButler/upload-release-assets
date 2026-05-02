@@ -83,7 +83,7 @@ export async function run() {
 
       if (existingAsset) {
         debug(
-          `Removing existing asset '${file}' with ID ${existingAsset.id}...`,
+          `Removing existing asset '${fileName}' with ID ${existingAsset.id}...`,
         );
         await octokit.rest.repos.deleteReleaseAsset({
           ...repo,
@@ -91,7 +91,7 @@ export async function run() {
         });
       }
 
-      const fileStream = await readFile(file);
+      const fileBuffer = await readFile(file);
       const contentType = mime.lookup(file) || "application/zip";
 
       console.log(`Uploading ${file}...`);
@@ -99,7 +99,7 @@ export async function run() {
 
       const headers = {
         "content-type": contentType,
-        "content-length": fileStream.length,
+        "content-length": fileBuffer.length,
       };
 
       await octokit.rest.repos.uploadReleaseAsset({
@@ -109,7 +109,7 @@ export async function run() {
         headers,
         name: fileName,
         // Octokits typings only accept string, but the code also accepts Buffer, so this tricks TypeScript into allowing the buffer
-        data: fileStream as unknown as string,
+        data: fileBuffer as unknown as string,
       });
     }
 
