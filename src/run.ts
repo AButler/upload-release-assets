@@ -8,52 +8,53 @@ import mime from "mime-types";
 export async function run() {
   try {
     const repo = context.repo;
-    const glob = getInput("files", { required: true });
-    const tag = getInput("release-tag");
-    const releaseId = getInput("release-id");
+    const inputGlob = getInput("files", { required: true });
+    const inputTag = getInput("release-tag");
+    const inputReleaseId = getInput("release-id");
     const token = getInput("repo-token", { required: true });
 
     const octokit = getOctokit(token);
 
-    let release_id: number = 0;
+    let releaseId: number = 0;
+
     const parsedReleaseId =
-      releaseId && /^\d+$/.test(releaseId)
-        ? Number.parseInt(releaseId, 10)
+      inputReleaseId && /^\d+$/.test(inputReleaseId)
+        ? Number.parseInt(inputReleaseId, 10)
         : null;
 
     if (parsedReleaseId !== null) {
       debug(`Using explicit release id ${parsedReleaseId}...`);
-      release_id = parsedReleaseId;
-    } else if (tag) {
-      debug(`Getting release id for ${tag}...`);
+      releaseId = parsedReleaseId;
+    } else if (inputTag) {
+      debug(`Getting release id for ${inputTag}...`);
       try {
         const release = await octokit.rest.repos.getReleaseByTag({
           ...repo,
-          tag,
+          tag: inputTag,
         });
 
-        release_id = release.data.id;
+        releaseId = release.data.id;
       } catch (error: any) {
         const message = error?.message || "Unknown error";
-        setFailed(`Could not get release id for tag ${tag}: ${message}`);
+        setFailed(`Could not get release id for tag ${inputTag}: ${message}`);
         return;
       }
     } else {
       const releaseIdFromPayload = context.payload?.release?.id;
       if (releaseIdFromPayload) {
         debug(`Using release id from action ${releaseIdFromPayload}...`);
-        release_id = releaseIdFromPayload;
+        releaseId = releaseIdFromPayload;
       }
     }
 
-    if (!release_id) {
+    if (!releaseId) {
       setFailed("Could not find release");
       return;
     }
 
-    debug(`Uploading assets to release: ${release_id}...`);
+    debug(`Uploading assets to release: ${releaseId}...`);
 
-    const patterns = glob
+    const patterns = inputGlob
       .split(";")
       .map((pattern) => pattern.trim())
       .filter((pattern) => pattern.length > 0);
@@ -66,12 +67,12 @@ export async function run() {
 
     const {
       data: { upload_url: upload_url, html_url: html_url },
-    } = await octokit.rest.repos.getRelease({ ...repo, release_id });
+    } = await octokit.rest.repos.getRelease({ ...repo, release_id: releaseId });
 
     const { data: existingAssets } = await octokit.rest.repos.listReleaseAssets(
       {
         ...repo,
-        release_id,
+        release_id: releaseId,
       },
     );
 
@@ -97,13 +98,13 @@ export async function run() {
 
       const headers = {
         "content-type": contentType,
-        "content-length": (await stat(file)).size,
+        "content-length": fileStream.length,
       };
 
       await octokit.rest.repos.uploadReleaseAsset({
         ...repo,
         url: upload_url as string,
-        release_id: release_id,
+        release_id: releaseId,
         headers,
         name: fileName,
         // Octokits typings only accept string, but the code also accepts Buffer, so this tricks TypeScript into allowing the buffer

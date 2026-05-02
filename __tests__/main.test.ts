@@ -239,4 +239,32 @@ describe("upload-release-assets", () => {
     expect(mockFg).toHaveBeenCalledWith(["*.txt", "*.md"]);
     expect(mockUploadReleaseAsset).toHaveBeenCalledTimes(2);
   });
+
+  it("filters out empty and whitespace-only patterns from the files input", async () => {
+    setupInputs("*.txt;  ;*.md;;  ", "42");
+    setupRelease(42);
+    mockFg.mockResolvedValue(["file.txt"]);
+
+    await run();
+
+    expect(mockFg).toHaveBeenCalledWith(["*.txt", "*.md"]);
+    expect(mockUploadReleaseAsset).toHaveBeenCalledTimes(1);
+  });
+
+  it("handles file paths with spaces in their names", async () => {
+    setupInputs("dist/**", "42");
+    setupRelease(42);
+    mockFg.mockResolvedValue(["dist/my file.txt", "path/to/another file.md"]);
+
+    await run();
+
+    expect(mockSetFailed).not.toHaveBeenCalled();
+    expect(mockUploadReleaseAsset).toHaveBeenCalledTimes(2);
+    expect(mockUploadReleaseAsset).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "my file.txt" }),
+    );
+    expect(mockUploadReleaseAsset).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "another file.md" }),
+    );
+  });
 });
