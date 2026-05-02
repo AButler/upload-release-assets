@@ -1,6 +1,6 @@
+import { setFailed } from "@actions/core";
 import { run } from "./run";
 
 run().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+  setFailed(error instanceof Error ? error.message : String(error));
 });

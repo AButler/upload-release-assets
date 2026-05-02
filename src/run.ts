@@ -99,7 +99,7 @@ export async function run() {
 
       const headers = {
         "content-type": contentType,
-        "content-length": fileBuffer.length,
+        "content-length": fileBuffer.byteLength.toString(),
       };
 
       await octokit.rest.repos.uploadReleaseAsset({
