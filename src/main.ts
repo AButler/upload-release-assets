@@ -1,3 +1,3 @@
-import { run } from "./run.js";
+import { run } from "./run";
 
 run();

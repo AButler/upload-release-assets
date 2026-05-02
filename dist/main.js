@@ -38641,10 +38641,11 @@ async function run() {
         return;
       }
     } else {
-      debug(
-        `Using release id from action ${context2.payload.release.id}...`
-      );
-      release_id = context2.payload.release.id;
+      const releaseIdFromPayload = context2.payload?.release?.id;
+      if (releaseIdFromPayload) {
+        debug(`Using release id from action ${releaseIdFromPayload}...`);
+        release_id = releaseIdFromPayload;
+      }
     }
     if (!release_id) {
       setFailed("Could not find release");
@@ -38666,17 +38667,17 @@ async function run() {
       }
     );
     for (let file of files) {
-      const existingAsset = existingAssets.find((a) => a.name === file);
+      const fileName = import_path.default.basename(file);
+      const existingAsset = existingAssets.find((a) => a.name === fileName);
       if (existingAsset) {
         debug(
           `Removing existing asset '${file}' with ID ${existingAsset.id}...`
         );
-        octokit.rest.repos.deleteReleaseAsset({
+        await octokit.rest.repos.deleteReleaseAsset({
           ...repo,
           asset_id: existingAsset.id
         });
       }
-      const fileName = import_path.default.basename(file);
       const fileStream = import_fs3.default.readFileSync(file);
       const contentType = import_mime_types.default.lookup(file) || "application/zip";
       console.log(`Uploading ${file}...`);

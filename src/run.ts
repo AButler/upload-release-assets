@@ -1,5 +1,5 @@
-import * as core from "@actions/core";
-import * as github from "@actions/github";
+import { getInput, setFailed, debug } from "@actions/core";
+import { context, getOctokit } from "@actions/github";
 import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
@@ -7,21 +7,21 @@ import mime from "mime-types";
 
 export async function run() {
   try {
-    const repo = github.context.repo;
-    const glob = core.getInput("files", { required: true });
-    const tag = core.getInput("release-tag");
-    const releaseId = core.getInput("release-id");
-    const token = core.getInput("repo-token", { required: true });
+    const repo = context.repo;
+    const glob = getInput("files", { required: true });
+    const tag = getInput("release-tag");
+    const releaseId = getInput("release-id");
+    const token = getInput("repo-token", { required: true });
 
-    const octokit = github.getOctokit(token);
+    const octokit = getOctokit(token);
 
     let release_id: number = 0;
 
     if (releaseId && Number.isInteger(parseInt(releaseId))) {
-      core.debug(`Using explicit release id ${releaseId}...`);
+      debug(`Using explicit release id ${releaseId}...`);
       release_id = parseInt(releaseId);
     } else if (tag) {
-      core.debug(`Getting release id for ${tag}...`);
+      debug(`Getting release id for ${tag}...`);
       try {
         const release = await octokit.rest.repos.getReleaseByTag({
           ...repo,
@@ -31,26 +31,27 @@ export async function run() {
         release_id = release.data.id;
       } catch (error: any) {
         const message = error?.message || "Unknown error";
-        core.setFailed(`Could not get release id for tag ${tag}: ${message}`);
+        setFailed(`Could not get release id for tag ${tag}: ${message}`);
         return;
       }
     } else {
-      core.debug(
-        `Using release id from action ${github.context.payload.release.id}...`,
-      );
-      release_id = github.context.payload.release.id;
+      const releaseIdFromPayload = context.payload?.release?.id;
+      if (releaseIdFromPayload) {
+        debug(`Using release id from action ${releaseIdFromPayload}...`);
+        release_id = releaseIdFromPayload;
+      }
     }
 
     if (!release_id) {
-      core.setFailed("Could not find release");
+      setFailed("Could not find release");
       return;
     }
 
-    core.debug(`Uploading assets to release: ${release_id}...`);
+    debug(`Uploading assets to release: ${release_id}...`);
 
     const files = await fg(glob.split(";"));
     if (!files.length) {
-      core.setFailed("No files found");
+      setFailed("No files found");
       return;
     }
 
@@ -66,23 +67,24 @@ export async function run() {
     );
 
     for (let file of files) {
-      const existingAsset = existingAssets.find((a: any) => a.name === file);
+      const fileName = path.basename(file);
+      const existingAsset = existingAssets.find((a) => a.name === fileName);
+
       if (existingAsset) {
-        core.debug(
+        debug(
           `Removing existing asset '${file}' with ID ${existingAsset.id}...`,
         );
-        octokit.rest.repos.deleteReleaseAsset({
+        await octokit.rest.repos.deleteReleaseAsset({
           ...repo,
           asset_id: existingAsset.id,
         });
       }
 
-      const fileName = path.basename(file);
       const fileStream = fs.readFileSync(file);
       const contentType = mime.lookup(file) || "application/zip";
 
       console.log(`Uploading ${file}...`);
-      core.debug(`Content-Type = '${contentType}'`);
+      debug(`Content-Type = '${contentType}'`);
 
       const headers = {
         "content-type": contentType,
@@ -103,6 +105,6 @@ export async function run() {
     console.log(`Upload complete: ${html_url}`);
   } catch (error: any) {
     const message = error?.message || "Unknown error";
-    core.setFailed(message);
+    setFailed(message);
   }
 }
