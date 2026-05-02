@@ -15,8 +15,8 @@ const {
   mockGetOctokit,
   mockContext,
   mockFg,
-  mockReadFileSync,
-  mockStatSync,
+  mockReadFile,
+  mockStat,
   mockMimeLookup,
 } = vi.hoisted(() => {
   const mockGetReleaseByTag = vi.fn();
@@ -52,8 +52,8 @@ const {
       payload: { release: { id: 99 } },
     },
     mockFg: vi.fn(),
-    mockReadFileSync: vi.fn(() => Buffer.from("file-content")),
-    mockStatSync: vi.fn(() => ({ size: 12 })),
+    mockReadFile: vi.fn(() => Promise.resolve(Buffer.from("file-content"))),
+    mockStat: vi.fn(() => Promise.resolve({ size: 12 })),
     mockMimeLookup: vi.fn(() => "text/plain"),
   };
 });
@@ -71,11 +71,9 @@ vi.mock("@actions/github", () => ({
 
 vi.mock("fast-glob", () => ({ default: mockFg }));
 
-vi.mock("fs", () => ({
-  default: {
-    readFileSync: mockReadFileSync,
-    statSync: mockStatSync,
-  },
+vi.mock("fs/promises", () => ({
+  readFile: mockReadFile,
+  stat: mockStat,
 }));
 
 vi.mock("mime-types", () => ({

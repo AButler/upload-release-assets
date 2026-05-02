@@ -1,7 +1,7 @@
 import { getInput, setFailed, debug } from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 import fg from "fast-glob";
-import fs from "fs";
+import { readFile, stat } from "fs/promises";
 import path from "path";
 import mime from "mime-types";
 
@@ -89,7 +89,7 @@ export async function run() {
         });
       }
 
-      const fileStream = fs.readFileSync(file);
+      const fileStream = await readFile(file);
       const contentType = mime.lookup(file) || "application/zip";
 
       console.log(`Uploading ${file}...`);
@@ -97,7 +97,7 @@ export async function run() {
 
       const headers = {
         "content-type": contentType,
-        "content-length": fs.statSync(file).size,
+        "content-length": (await stat(file)).size,
       };
 
       await octokit.rest.repos.uploadReleaseAsset({
@@ -106,7 +106,7 @@ export async function run() {
         release_id: release_id,
         headers,
         name: fileName,
-        // Octokits typings only accept string, but the code also accepts Buffer, so this tricks Typescript into allowing the buffer
+        // Octokits typings only accept string, but the code also accepts Buffer, so this tricks TypeScript into allowing the buffer
         data: fileStream as unknown as string,
       });
     }
