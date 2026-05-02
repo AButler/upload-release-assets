@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ["master"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["master"]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -14,11 +14,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
       - name: Restore
         run: npm ci
 
+      - name: Audit
+        run: npm audit --audit-level=high --ignore-scripts --omit=optional
+
       - name: Build
         run: npm run build
+
+      - name: Test
+        run: npm test
 
       - name: Check contributors
         run: npx all-contributors check
