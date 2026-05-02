@@ -5,7 +5,7 @@
   "description": "GitHub Action for uploading assets to a Release",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc --noEmit && esbuild src/main.ts --bundle --platform=node --target=node24 --outfile=dist/main.js",
+    "build": "tsc --noEmit && esbuild src/main.ts --bundle --platform=node --target=node24 --minify --outfile=dist/main.js",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
