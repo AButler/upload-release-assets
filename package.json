@@ -5,7 +5,9 @@
   "description": "GitHub Action for uploading assets to a Release",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --noEmit && esbuild src/main.ts --bundle --platform=node --target=node24 --minify --outfile=dist/main.js",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -20,15 +22,18 @@
   "author": "AButler",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.10.1",
-    "@actions/github": "^6.0.0",
-    "fast-glob": "^3.3.2",
-    "mime-types": "^2.1.24"
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1",
+    "fast-glob": "^3.3.3",
+    "mime-types": "^3.0.2"
   },
   "devDependencies": {
-    "@types/mime-types": "^2.1.0",
-    "@types/node": "^20.9.2",
+    "@types/mime-types": "^3.0.1",
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.28.0",
+    "@vitest/coverage-v8": "^4.1.5",
     "all-contributors-cli": "^6.26.1",
-    "typescript": "^5.2.2"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
   }
 }

@@ -1,13 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2024",
     "module": "NodeNext",
     "rootDir": "./src",
     "moduleResolution": "NodeNext",
-    "baseUrl": "./",
-    "sourceMap": true,
-    "outDir": "./dist",
     "noImplicitAny": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,5 +12,11 @@
     "skipLibCheck": true,
     "newLine": "lf"
   },
-  "exclude": ["./dist", "./node_modules", "./__tests__", "./coverage"]
+  "exclude": [
+    "./dist",
+    "./node_modules",
+    "./__tests__",
+    "./coverage",
+    "./vitest.config.ts"
+  ]
 }
