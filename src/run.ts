@@ -16,10 +16,14 @@ export async function run() {
     const octokit = getOctokit(token);
 
     let release_id: number = 0;
+    const parsedReleaseId =
+      releaseId && /^\d+$/.test(releaseId)
+        ? Number.parseInt(releaseId, 10)
+        : null;
 
-    if (releaseId && Number.isInteger(parseInt(releaseId))) {
-      debug(`Using explicit release id ${releaseId}...`);
-      release_id = parseInt(releaseId);
+    if (parsedReleaseId !== null) {
+      debug(`Using explicit release id ${parsedReleaseId}...`);
+      release_id = parsedReleaseId;
     } else if (tag) {
       debug(`Getting release id for ${tag}...`);
       try {
@@ -49,7 +53,12 @@ export async function run() {
 
     debug(`Uploading assets to release: ${release_id}...`);
 
-    const files = await fg(glob.split(";"));
+    const patterns = glob
+      .split(";")
+      .map((pattern) => pattern.trim())
+      .filter((pattern) => pattern.length > 0);
+
+    const files = await fg(patterns);
     if (!files.length) {
       setFailed("No files found");
       return;
