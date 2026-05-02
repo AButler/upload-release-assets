@@ -16,7 +16,6 @@ const {
   mockContext,
   mockFg,
   mockReadFile,
-  mockStat,
   mockMimeLookup,
 } = vi.hoisted(() => {
   const mockGetReleaseByTag = vi.fn();
@@ -53,7 +52,6 @@ const {
     },
     mockFg: vi.fn(),
     mockReadFile: vi.fn(() => Promise.resolve(Buffer.from("file-content"))),
-    mockStat: vi.fn(() => Promise.resolve({ size: 12 })),
     mockMimeLookup: vi.fn(() => "text/plain"),
   };
 });
@@ -73,7 +71,6 @@ vi.mock("fast-glob", () => ({ default: mockFg }));
 
 vi.mock("fs/promises", () => ({
   readFile: mockReadFile,
-  stat: mockStat,
 }));
 
 vi.mock("mime-types", () => ({

@@ -1,7 +1,7 @@
 import { getInput, setFailed, debug } from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 import fg from "fast-glob";
-import { readFile, stat } from "fs/promises";
+import { readFile } from "fs/promises";
 import path from "path";
 import mime from "mime-types";
 
@@ -34,8 +34,9 @@ export async function run() {
         });
 
         releaseId = release.data.id;
-      } catch (error: any) {
-        const message = error?.message || "Unknown error";
+      } catch (error: unknown) {
+        const message =
+          (error instanceof Error ? error?.message : null) || "Unknown error";
         setFailed(`Could not get release id for tag ${inputTag}: ${message}`);
         return;
       }
@@ -113,8 +114,9 @@ export async function run() {
     }
 
     console.log(`Upload complete: ${html_url}`);
-  } catch (error: any) {
-    const message = error?.message || "Unknown error";
+  } catch (error: unknown) {
+    const message =
+      (error instanceof Error ? error?.message : null) || "Unknown error";
     setFailed(message);
   }
 }
