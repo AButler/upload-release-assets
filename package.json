@@ -31,7 +31,7 @@
     "@types/mime-types": "^3.0.1",
     "@types/node": "^24.0.0",
     "esbuild": "^0.28.0",
-    "@vitest/coverage-v8": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.8",
     "all-contributors-cli": "^6.26.1",
     "typescript": "^6.0.3",
     "vitest": "^4.1.5"
